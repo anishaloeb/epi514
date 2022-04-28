@@ -43,11 +43,3 @@ table(NonCaregive18$X_AGEG5YR >= 7 & NonCaregive18$X_AGEG5YR <= 11)
 table(Caregive18$EMPLOY1)
 
 # Employment
-
-
-#library(usethis)
-#usethis::use_git_config(user.name = "anishaloeb", user.email = "aloeb@uw.edu")
-#usethis::create_github_token() 
-#credentials::set_github_pat("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")
-
-#Ben test test 
