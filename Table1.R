@@ -39,7 +39,41 @@ table(NonCaregive18$X_AGEG5YR >= 1 & NonCaregive18$X_AGEG5YR <= 9)
 table(Caregive18$X_AGEG5YR >= 7 & Caregive18$X_AGEG5YR <= 11)
 table(NonCaregive18$X_AGEG5YR >= 7 & NonCaregive18$X_AGEG5YR <= 11)
 
-# Education
+# Education (did not graduate high school, graduated high school, attended college or technical school, graduated from college or technical school)
 table(Caregive18$EMPLOY1)
 
-# Employment
+# Employment (currently employed for wages, self-employed, out of work for at least 1 year, out of work for less than 1 year, a homemaker, a student, retired, or unable to work)
+
+# Income/SES ($0-$14,999, $15,000-$24,999, $25,000-$34,999, $35,000-$49,999, $50,0000)
+
+# marital status?
+
+# children in household?
+
+# State political affiliation?
+
+# insurance status y/n
+
+# Type of insurance (employer, individual buy in, Medicare, Medicaid, military, AI/AN services, or some other source)
+
+# last checkup (within the past year, within the past two years, within the past five years, or five or more years ago).
+# Up-to-date checkup (see their primary care provider (PCP) every 3 years and those over 50 years see their PCP every year)
+
+# Influence vaccine in past 12 months
+
+# Self-rated general health (Excellent/Very good, good, fair, poor)
+
+# days in poor mental or physical health?
+
+#health behaviors?
+# Smoking status?
+#BMI?
+#Physical activity?
+#sleep?
+# alcohol consumption
+#daily servings of fruits of vegetables?
+
+#caregiving variables?
+#relationship to recipient?
+#duration?
+#hours per week?
