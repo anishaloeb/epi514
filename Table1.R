@@ -1,6 +1,7 @@
 library("tidyverse")
 library("haven")
 library("boot")
+library("survey")
 
 # Read in data
 BRFSS18v3 <- read.csv("~/Desktop/UW MPH/Year 1/Spring 2022/EPI 514/BRFSS18v3.csv")
@@ -8,36 +9,55 @@ BRFSS18v1 <- read.csv("~/Desktop/UW MPH/Year 1/Spring 2022/EPI 514/BRFSS18v1.csv
 BRFSS18v2 <- read.csv("~/Desktop/UW MPH/Year 1/Spring 2022/EPI 514/BRFSS18v2.csv")
 BRFSS2018 <- read.csv("~/Desktop/UW MPH/Year 1/Spring 2022/EPI 514/BRFSS2018.csv")
 
+# Correcting LLCPTWT
+colnames(BRFSS18v1)[colnames(BRFSS18v1) == "X_LCPWTV1"] <- "X_LLCPWT"
+colnames(BRFSS18v2)[colnames(BRFSS18v2) == "X_LCPWTV2"] <- "X_LLCPWT"
+colnames(BRFSS18v3)[colnames(BRFSS18v3) == "X_LCPWTV3"] <- "X_LLCPWT"
+
+# Creating version names
+BRFSS2018$VERSION <- 0
+BRFSS18v1$VERSION <- 1
+BRFSS18v2$VERSION <- 2
+BRFSS18v3$VERSION <- 3
+
 # Append data
 BRFSS2018_append <- bind_rows(BRFSS18v1, BRFSS18v2)
 BRFSS2018_append  <- bind_rows(BRFSS2018_append, BRFSS2018)
 BRFSS2018_append  <- bind_rows(BRFSS2018_append , BRFSS18v3)
 
+BRFSS2018_append <- BRFSS2018_append[BRFSS2018_append$X_STATE %in% 
+                                       c(13, 34, 36, 39, 41),]
+
+
+# Set vars to keep
+
 # Sep by Exp Status
 # Remove Missing
 BRFSS2018_append$CAREGIV1[BRFSS2018_append$CAREGIV1 == 9] <- NA
 
-BRFSS2018_append$X_AGEG5YR <- factor(BRFSS2018_append$X_AGEG5YR, 
-                                     levels = 1:14,
-                                     labels = c("18-24", "25-29", "30-34", "35-39",
-                                                "40-44", "45-49", "50-54", "55-59",
-                                                "60-64", "65-69", "70-74", "75-79",
-                                                "80+", "idk, ref, missing"))
-
+# Caregive Subset
 Caregive18 <- BRFSS2018_append %>% filter(BRFSS2018_append$CAREGIV1 == 1) # are you caregiver
 Caregive18 <- Caregive18 %>% filter(Caregive18$CRGVLNG1 > 1) # over 30 days
 
+options(survey.lonely.psu = "adjust")
+bdCaregive <- svydesign(data = Caregive18, id = ~X_PSU, strata = ~X_STSTR,
+                        weight = ~X_LLCPWT, nest = TRUE)
+
+svymean(~X_AGE80, bdCaregive)
+svytable(~X_AGEG5YR,bdCaregive)
+
+
+# NonCaregive Subset
 NonCaregive <- BRFSS2018_append %>% filter(BRFSS2018_append$CAREGIV1 > 1)
 CaregiveU30 <- BRFSS2018_append %>% filter(BRFSS2018_append$CRGVLNG1 == 1)
 NonCaregive18 <- bind_rows(NonCaregive,CaregiveU30)
 
-# Age
-# Pap: 18-64
-table(Caregive18$X_AGEG5YR >= 1 & Caregive18$X_AGEG5YR <= 9)
-table(NonCaregive18$X_AGEG5YR >= 1 & NonCaregive18$X_AGEG5YR <= 9)
-# Mammogram: 50-74
-table(Caregive18$X_AGEG5YR >= 7 & Caregive18$X_AGEG5YR <= 11)
-table(NonCaregive18$X_AGEG5YR >= 7 & NonCaregive18$X_AGEG5YR <= 11)
+bdNonCaregive <- svydesign(data = NonCaregive18, id = ~X_PSU, strata = ~X_STSTR,
+                           weight = ~X_LLCPWT, nest = TRUE)
+
+svymean(~X_AGE80, bdNonCaregive)
+svytable(~X_AGEG5YR,bdNonCaregive)
+
 
 # Education (did not graduate high school, graduated high school, attended college or technical school, graduated from college or technical school)
 table(Caregive18$EMPLOY1)
