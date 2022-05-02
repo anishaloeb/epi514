@@ -112,3 +112,5 @@ options(survey.lonely.psu = "adjust")
 bd <- svydesign(data = BRFSS2018_append, id = ~X_PSU, strata = ~X_STSTR,
                         weight = ~X_LLCPWT, nest = TRUE)
 
+# example of prop.table
+prop.table(svytable(~X_AGE65YR + CareCat, design = bd), margin = 2)
