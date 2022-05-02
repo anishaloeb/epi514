@@ -59,6 +59,7 @@ svymean(~X_AGE80, bdNonCaregive)
 svytable(~X_AGEG5YR,bdNonCaregive)
 
 
+
 # Education (did not graduate high school, graduated high school, attended college or technical school, graduated from college or technical school)
 table(Caregive18$EMPLOY1)
 
@@ -97,3 +98,17 @@ table(Caregive18$EMPLOY1)
 #relationship to recipient?
 #duration?
 #hours per week?
+
+
+
+BRFSS2018_append$CareCat <- 0
+
+BRFSS2018_append$CareCat[BRFSS2018_append$CAREGIV1 ==1 & BRFSS2018_append$CRGVLNG1 > 1] <- 1
+
+
+
+options(survey.lonely.psu = "adjust")
+
+bd <- svydesign(data = BRFSS2018_append, id = ~X_PSU, strata = ~X_STSTR,
+                        weight = ~X_LLCPWT, nest = TRUE)
+
