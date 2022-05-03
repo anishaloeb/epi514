@@ -173,4 +173,16 @@ svytable(~HLTHPLN1 + CareCat, design = bd,  exclude = 'null', na.action=na.pass)
 # Poor Mental Health Days
 svyby(~MENTHLTH, by = ~CareCat, design = bd, FUN = svymean, na.rm = TRUE)
 
+#income 
+
+svytable(~X_INCOMG + CareCat,bd, exclude='null', na.action=na.pass)
+
+prop.table(svytable(~X_INCOMG + CareCat, bd, exclude='null', 
+                    na.action=na.pass), margin = 2)*100
+
+
+##dr visits in last 12 months (DRVISITS)
+
+svyby(~DRVISITS, by = ~CareCat, design = bd, FUN = svymean, na.rm = TRUE)
+
 
