@@ -117,27 +117,29 @@ bd <- svydesign(data = BRFSS2018_append, id = ~X_PSU, strata = ~X_STSTR,
 ###Education 
 summary(BRFSS2018_append$X_EDUCAG)
 
-# Education Table for Caregivers
-svytable(~X_EDUCAG + CareCat,bd)
-prop.table(svytable(~X_EDUCAG + CareCat,bd), margin = 2) *100
+#Table for Caregivers
+svytable(~X_EDUCAG + CareCat,bd, exclude='null', na.action=na.pass)
+prop.table(svytable(~X_EDUCAG + CareCat, bd, exclude='null', na.action=na.pass), margin = 2) *100
+
 
 ### Flu Shot
 # 1=yes, 2=no
 summary(BRFSS2018_append$FLUSHOT6)
 
-svytable(~FLUSHOT6 + CareCat,bd)
-prop.table(svytable(~FLUSHOT6 + CareCat, bd), margin = 2) *100
+svytable(~FLUSHOT6 + CareCat,bd, exclude='null', na.action=na.pass)
+prop.table(svytable(~FLUSHOT6 + CareCat, bd, exclude='null', na.action=na.pass), margin = 2) *100
+
 
 ### Marital
 summary(BRFSS2018_append$MARITAL)
 
-svytable(~MARITAL + CareCat,bd)
-prop.table(svytable(~MARITAL + CareCat, bd), margin = 2) *100
+svytable(~MARITAL + CareCat,bd, exclude='null', na.action=na.pass)
+prop.table(svytable(~MARITAL + CareCat, bd, exclude='null', na.action=na.pass), margin = 2) *100
 
 ###GenHlth
 summary(BRFSS2018_append$GENHLTH)
 
-svytable(~GENHLTH + CareCat,bd)
-prop.table(svytable(~GENHLTH + CareCat, bd), margin = 2) *100
+svytable(~GENHLTH + CareCat,bd, exclude='null', na.action=na.pass)
+prop.table(svytable(~GENHLTH + CareCat, bd, exclude='null', na.action=na.pass), margin = 2) *100
 
 
