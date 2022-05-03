@@ -114,3 +114,8 @@ bd <- svydesign(data = BRFSS2018_append, id = ~X_PSU, strata = ~X_STSTR,
 
 # example of prop.table
 prop.table(svytable(~X_AGE65YR + CareCat, design = bd), margin = 2)
+
+
+# function mean
+svyby(~X_AGE80, by = ~CareCat, design = bd, FUN = svymean, na.rm = TRUE)
+
