@@ -35,7 +35,9 @@ BRFSS2018_append <- BRFSS2018_append[BRFSS2018_append$X_STATE %in%
 # Remove Missing
 # BRFSS2018_append$CAREGIV1[BRFSS2018_append$CAREGIV1 == 9] <- NA
 
-# Caregive Subset intwo 2 dataframes??
+
+### Subset intwo 2 dataframes?? - Decided to keep as one dataframe below commented code
+# Caregive 
 #Caregive18 <- BRFSS2018_append %>% filter(BRFSS2018_append$CAREGIV1 == 1) # are you caregiver
 #Caregive18 <- Caregive18 %>% filter(Caregive18$CRGVLNG1 > 1) # over 30 days
 
@@ -52,7 +54,7 @@ BRFSS2018_append <- BRFSS2018_append[BRFSS2018_append$X_STATE %in%
 #NonCaregive18 <- bind_rows(NonCaregive,CaregiveU30)
 
 #bdNonCaregive <- svydesign(data = NonCaregive18, id = ~X_PSU, strata = ~X_STSTR,
-                           weight = ~X_LLCPWT, nest = TRUE)
+                         #  weight = ~X_LLCPWT, nest = TRUE)
 
 #svymean(~X_AGE80, bdNonCaregive)
 #svytable(~X_AGEG5YR,bdNonCaregive)
