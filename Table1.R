@@ -36,7 +36,7 @@ BRFSS2018_append <- BRFSS2018_append[BRFSS2018_append$X_STATE %in%
 # BRFSS2018_append$CAREGIV1[BRFSS2018_append$CAREGIV1 == 9] <- NA
 
 
-### Subset intwo 2 dataframes?? - Decided to keep as one dataframe below commented code
+### Subset into 2 dataframes?? - Decided to keep as one dataframe below commented code
 # Caregive 
 #Caregive18 <- BRFSS2018_append %>% filter(BRFSS2018_append$CAREGIV1 == 1) # are you caregiver
 #Caregive18 <- Caregive18 %>% filter(Caregive18$CRGVLNG1 > 1) # over 30 days
