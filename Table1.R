@@ -43,7 +43,7 @@ BRFSS2018_append <- BRFSS2018_append[BRFSS2018_append$X_STATE %in%
 
 #options(survey.lonely.psu = "adjust")
 #bdCaregive <- svydesign(data = Caregive18, id = ~X_PSU, strata = ~X_STSTR,
-                        weight = ~X_LLCPWT, nest = TRUE)
+                      #  weight = ~X_LLCPWT, nest = TRUE)
 
 #svymean(~X_AGE80, bdCaregive)
 #svytable(~X_AGEG5YR,bdCaregive)
