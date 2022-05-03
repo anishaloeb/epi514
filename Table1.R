@@ -33,59 +33,44 @@ BRFSS2018_append <- BRFSS2018_append[BRFSS2018_append$X_STATE %in%
 
 # Sep by Exp Status
 # Remove Missing
-BRFSS2018_append$CAREGIV1[BRFSS2018_append$CAREGIV1 == 9] <- NA
+# BRFSS2018_append$CAREGIV1[BRFSS2018_append$CAREGIV1 == 9] <- NA
 
-# Caregive Subset
-Caregive18 <- BRFSS2018_append %>% filter(BRFSS2018_append$CAREGIV1 == 1) # are you caregiver
-Caregive18 <- Caregive18 %>% filter(Caregive18$CRGVLNG1 > 1) # over 30 days
+# Caregive Subset intwo 2 dataframes??
+#Caregive18 <- BRFSS2018_append %>% filter(BRFSS2018_append$CAREGIV1 == 1) # are you caregiver
+#Caregive18 <- Caregive18 %>% filter(Caregive18$CRGVLNG1 > 1) # over 30 days
 
-options(survey.lonely.psu = "adjust")
-bdCaregive <- svydesign(data = Caregive18, id = ~X_PSU, strata = ~X_STSTR,
+#options(survey.lonely.psu = "adjust")
+#bdCaregive <- svydesign(data = Caregive18, id = ~X_PSU, strata = ~X_STSTR,
                         weight = ~X_LLCPWT, nest = TRUE)
 
-svymean(~X_AGE80, bdCaregive)
-svytable(~X_AGEG5YR,bdCaregive)
-
+#svymean(~X_AGE80, bdCaregive)
+#svytable(~X_AGEG5YR,bdCaregive)
 
 # NonCaregive Subset
-NonCaregive <- BRFSS2018_append %>% filter(BRFSS2018_append$CAREGIV1 > 1)
-CaregiveU30 <- BRFSS2018_append %>% filter(BRFSS2018_append$CRGVLNG1 == 1)
-NonCaregive18 <- bind_rows(NonCaregive,CaregiveU30)
+#NonCaregive <- BRFSS2018_append %>% filter(BRFSS2018_append$CAREGIV1 > 1)
+#CaregiveU30 <- BRFSS2018_append %>% filter(BRFSS2018_append$CRGVLNG1 == 1)
+#NonCaregive18 <- bind_rows(NonCaregive,CaregiveU30)
 
-bdNonCaregive <- svydesign(data = NonCaregive18, id = ~X_PSU, strata = ~X_STSTR,
+#bdNonCaregive <- svydesign(data = NonCaregive18, id = ~X_PSU, strata = ~X_STSTR,
                            weight = ~X_LLCPWT, nest = TRUE)
 
-svymean(~X_AGE80, bdNonCaregive)
-svytable(~X_AGEG5YR,bdNonCaregive)
+#svymean(~X_AGE80, bdNonCaregive)
+#svytable(~X_AGEG5YR,bdNonCaregive)
 
-
-
+###Possible variable list?
 # Education (did not graduate high school, graduated high school, attended college or technical school, graduated from college or technical school)
-table(Caregive18$EMPLOY1)
-
 # Employment (currently employed for wages, self-employed, out of work for at least 1 year, out of work for less than 1 year, a homemaker, a student, retired, or unable to work)
-
 # Income/SES ($0-$14,999, $15,000-$24,999, $25,000-$34,999, $35,000-$49,999, $50,0000)
-
 # marital status?
-
 # children in household?
-
 # State political affiliation?
-
 # insurance status y/n
-
 # Type of insurance (employer, individual buy in, Medicare, Medicaid, military, AI/AN services, or some other source)
-
 # last checkup (within the past year, within the past two years, within the past five years, or five or more years ago).
 # Up-to-date checkup (see their primary care provider (PCP) every 3 years and those over 50 years see their PCP every year)
-
 # Influence vaccine in past 12 months
-
 # Self-rated general health (Excellent/Very good, good, fair, poor)
-
 # days in poor mental or physical health?
-
 #health behaviors?
 # Smoking status?
 #BMI?
@@ -93,29 +78,64 @@ table(Caregive18$EMPLOY1)
 #sleep?
 # alcohol consumption
 #daily servings of fruits of vegetables?
-
 #caregiving variables?
 #relationship to recipient?
 #duration?
 #hours per week?
 
+# Sep by Exp Status
+# Remove Missing
+BRFSS2018_append$CAREGIV1[BRFSS2018_append$CAREGIV1 == 9] <- NA
+BRFSS2018_append$X_EDUCAG[BRFSS2018_append$X_EDUCAG == 9] <- NA
+BRFSS2018_append$FLUSHOT6[BRFSS2018_append$FLUSHOT6 == 7] <- NA
+BRFSS2018_append$FLUSHOT6[BRFSS2018_append$FLUSHOT6 == 9] <- NA
+BRFSS2018_append$FLUSHOT6[BRFSS2018_append$FLUSHOT6 == ""] <- NA
+BRFSS2018_append$MARITAL[BRFSS2018_append$MARITAL == ""] <- NA
+BRFSS2018_append$MARITAL[BRFSS2018_append$MARITAL == 9] <- NA
+BRFSS2018_append$GENHLTH[BRFSS2018_append$GENHLTH == 7] <- NA
+BRFSS2018_append$GENHLTH[BRFSS2018_append$GENHLTH == 9] <- NA
+BRFSS2018_append$GENHLTH[BRFSS2018_append$GENHLTH == ""] <- NA
 
-
+#create variable for caregivers who have given care for more than 30 days
 BRFSS2018_append$CareCat <- 0
-
 BRFSS2018_append$CareCat[BRFSS2018_append$CAREGIV1 ==1 & BRFSS2018_append$CRGVLNG1 > 1] <- 1
-
-
 
 options(survey.lonely.psu = "adjust")
 
+#create weighted data frame
 bd <- svydesign(data = BRFSS2018_append, id = ~X_PSU, strata = ~X_STSTR,
-                        weight = ~X_LLCPWT, nest = TRUE)
+                weight = ~X_LLCPWT, nest = TRUE)
 
 # example of prop.table
-prop.table(svytable(~X_AGE65YR + CareCat, design = bd), margin = 2)
+#prop.table(svytable(~X_AGE65YR + CareCat, design = bd), margin = 2)
 
+# example of function mean
+#svyby(~X_AGE80, by = ~CareCat, design = bd, FUN = svymean, na.rm = TRUE)
 
-# function mean
-svyby(~X_AGE80, by = ~CareCat, design = bd, FUN = svymean, na.rm = TRUE)
+###Education 
+summary(BRFSS2018_append$X_EDUCAG)
+
+# Education Table for Caregivers
+svytable(~X_EDUCAG + CareCat,bd)
+prop.table(svytable(~X_EDUCAG + CareCat,bd), margin = 2) *100
+
+### Flu Shot
+# 1=yes, 2=no
+summary(BRFSS2018_append$FLUSHOT6)
+
+svytable(~FLUSHOT6 + CareCat,bd)
+prop.table(svytable(~FLUSHOT6 + CareCat, bd), margin = 2) *100
+
+### Marital
+summary(BRFSS2018_append$MARITAL)
+
+svytable(~MARITAL + CareCat,bd)
+prop.table(svytable(~MARITAL + CareCat, bd), margin = 2) *100
+
+###GenHlth
+summary(BRFSS2018_append$GENHLTH)
+
+svytable(~GENHLTH + CareCat,bd)
+prop.table(svytable(~GENHLTH + CareCat, bd), margin = 2) *100
+
 
