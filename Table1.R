@@ -98,6 +98,19 @@ BRFSS2018_append$GENHLTH[BRFSS2018_append$GENHLTH == 7] <- NA
 BRFSS2018_append$GENHLTH[BRFSS2018_append$GENHLTH == 9] <- NA
 BRFSS2018_append$GENHLTH[BRFSS2018_append$GENHLTH == ""] <- NA
 
+BRFSS2018_append$X_AGE65YR[BRFSS2018_append$X_AGE65YR == 3] <- NA
+BRFSS2018_append$EMPLOY1[BRFSS2018_append$EMPLOY1 == 9] <- NA
+
+BRFSS2018_append$CHECKUP1[BRFSS2018_append$CHECKUP1 == 7] <- NA
+BRFSS2018_append$CHECKUP1[BRFSS2018_append$CHECKUP1 == 9] <- NA
+
+BRFSS2018_append$HLTHPLN1[BRFSS2018_append$HLTHPLN1 == 7] <- NA
+BRFSS2018_append$HLTHPLN1[BRFSS2018_append$HLTHPLN1 == 9] <- NA
+
+BRFSS2018_append$MENTHLTH[BRFSS2018_append$MENTHLTH == 88] <- 0
+BRFSS2018_append$MENTHLTH[BRFSS2018_append$MENTHLTH == 77] <- NA
+BRFSS2018_append$MENTHLTH[BRFSS2018_append$MENTHLTH == 99] <- NA
+
 #create variable for caregivers who have given care for more than 30 days
 BRFSS2018_append$CareCat <- 0
 BRFSS2018_append$CareCat[BRFSS2018_append$CAREGIV1 ==1 & BRFSS2018_append$CRGVLNG1 > 1] <- 1
@@ -141,5 +154,23 @@ summary(BRFSS2018_append$GENHLTH)
 
 svytable(~GENHLTH + CareCat,bd, exclude='null', na.action=na.pass)
 prop.table(svytable(~GENHLTH + CareCat, bd, exclude='null', na.action=na.pass), margin = 2) *100
+
+# Mean age
+svyby(~X_AGE80, by = ~CareCat, design = bd, FUN = svymean, na.rm = TRUE)
+
+# Age 
+svytable(~X_AGE65YR + CareCat, design = bd, exclude = 'null', na.action=na.pass)
+
+# Employment
+svytable(~EMPLOY1 + CareCat, design = bd, exclude = 'null', na.action=na.pass)
+
+# Health Checkup
+svytable(~CHECKUP1 + CareCat, design = bd, exclude = 'null', na.action=na.pass)
+
+# Health Insurance
+svytable(~HLTHPLN1 + CareCat, design = bd,  exclude = 'null', na.action=na.pass)
+
+# Poor Mental Health Days
+svyby(~MENTHLTH, by = ~CareCat, design = bd, FUN = svymean, na.rm = TRUE)
 
 
