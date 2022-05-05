@@ -49,8 +49,6 @@ BRFSS2018_append <- BRFSS2018_append[, keepVars]
 write.csv(BRFSS2018_append, "Desktop/BRFSS2018_appendv2.csv", row.names = FALSE)
 
 
-# Set vars to keep
-
 # Sep by Exp Status
 # Remove Missing
 # BRFSS2018_append$CAREGIV1[BRFSS2018_append$CAREGIV1 == 9] <- NA
