@@ -73,6 +73,13 @@ BRFSS2018_append$MENTHLTH[BRFSS2018_append$MENTHLTH == 99] <- NA
 
 BRFSS2018_append$X_AGEG5YR[BRFSS2018_append$X_AGEG5YR == 14] <- NA
 
+BRFSS2018_append$X_EDUCAG[BRFSS2018_append$X_EDUCAG == 9] <- NA
+BRFSS2018_append$MARITAL[BRFSS2018_append$MARITAL == ""] <- NA
+BRFSS2018_append$MARITAL[BRFSS2018_append$MARITAL == 9] <- NA
+BRFSS2018_append$GENHLTH[BRFSS2018_append$GENHLTH == 7] <- NA
+BRFSS2018_append$GENHLTH[BRFSS2018_append$GENHLTH == 9] <- NA
+BRFSS2018_append$GENHLTH[BRFSS2018_append$GENHLTH == ""] <- NA
+
 # Create CareCat Var
 
 BRFSS2018_append$CareCat <- NA
@@ -105,6 +112,29 @@ prop.table(svytable(~CHECKUP1 + CareCat, design = bd, exclude = 'null', na.actio
 table(BRFSS2018_append$HLTHPLN1, BRFSS2018_append$CareCat, useNA = "always")
 prop.table(svytable(~HLTHPLN1 + CareCat, design = bd, exclude = 'null', na.action=na.pass),
            margin = 2) * 100
+
+###Education 
+summary(BRFSS2018_append$X_EDUCAG)
+
+table(BRFSS2018_append$X_EDUCAG, BRFSS2018_append$CareCat, useNA = "always") # raw
+prop.table(svytable(~X_EDUCAG + CareCat, bd, exclude='null', na.action=na.pass), margin = 2) *100
+
+
+### Marital
+summary(BRFSS2018_append$MARITAL)
+
+table(BRFSS2018_append$MARITAL, BRFSS2018_append$CareCat, useNA = "always") # raw
+prop.table(svytable(~MARITAL + CareCat, bd, exclude='null', na.action=na.pass), margin = 2) *100
+
+###GenHlth
+summary(BRFSS2018_append$GENHLTH)
+
+table(BRFSS2018_append$GENHLTH, BRFSS2018_append$CareCat, useNA = "always") # raw
+prop.table(svytable(~GENHLTH + CareCat, bd, exclude='null', na.action=na.pass), margin = 2) *100
+
+
+
+
 
 
 
