@@ -48,22 +48,6 @@ keepVars <- c("X_AGE65YR", "X_STATE", "X_PSU", "MENTHLTH", "HLTHPLN1", "CHECKUP1
 BRFSS2018_append <- BRFSS2018_append[, keepVars]
 write.csv(BRFSS2018_append, "Desktop/BRFSS2018_appendv2.csv", row.names = FALSE)
 
-# Ben Bryer
-# EPI514 Table 1
-# 5/2/22
-
-#load data
-rm(list = ls())
-setwd("C:/Users/bryer/OneDrive/Documents/UW/Spring22/EPI514")
-
-library("tidyverse")
-library("haven")
-library("boot")
-library("survey")
-
-BRFSS2018_append <- read.csv("BRFSS2018_appendv2.csv", stringsAsFactors=T)
-View(BRFSS2018_append)
-
 # Sep by Exp Status
 # Remove Missing for caregiving
 BRFSS2018_append$CAREGIV1[BRFSS2018_append$CAREGIV1 == 9] <- NA
@@ -81,8 +65,7 @@ BRFSS2018_append$GENHLTH[BRFSS2018_append$GENHLTH == ""] <- NA
 
 
 #create variable for caregivers who have given care for more than 30 days
-
-#Try out new CareCat1
+#CareCat
 BRFSS2018_append$CareCat<- NA
 BRFSS2018_append$CareCat[BRFSS2018_append$CAREGIV1 ==2] <- 0
 BRFSS2018_append$CareCat[BRFSS2018_append$CAREGIV1 ==1 & BRFSS2018_append$CRGVLNG1 == 1] <- 0
