@@ -33,7 +33,7 @@ BRFSS2018_append <- BRFSS2018_append %>% filter(BRFSS2018_append$SEX1 == 2)
 
 # Keep 21-75 years old
 BRFSS2018_append <- BRFSS2018_append %>% filter(BRFSS2018_append$X_AGE80 >= 25 
-                                                & BRFSS2018_append$X_AGE80 <= 75)
+                                                & BRFSS2018_append$X_AGE80 <= 74)
 
 # Set vars to keep
 
