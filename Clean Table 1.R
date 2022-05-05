@@ -91,6 +91,20 @@ table(BRFSS2018_append$X_AGEG5YR, BRFSS2018_append$CareCat, useNA = "always") # 
 prop.table(svytable(~X_AGEG5YR + CareCat, design = bd, exclude = 'null', na.action=na.pass),
            margin = 2) * 100
 
+# Employment status
+table(BRFSS2018_append$EMPLOY1, BRFSS2018_append$CareCat, useNA = "always")
+prop.table(svytable(~EMPLOY1 + CareCat, design = bd, exclude = 'null', na.action=na.pass),
+           margin = 2) * 100
+
+# CHECKUP1
+table(BRFSS2018_append$CHECKUP1, BRFSS2018_append$CareCat, useNA = "always")
+prop.table(svytable(~CHECKUP1 + CareCat, design = bd, exclude = 'null', na.action=na.pass),
+           margin = 2) * 100
+
+# Health insurance 
+table(BRFSS2018_append$HLTHPLN1, BRFSS2018_append$CareCat, useNA = "always")
+prop.table(svytable(~HLTHPLN1 + CareCat, design = bd, exclude = 'null', na.action=na.pass),
+           margin = 2) * 100
 
 
 
