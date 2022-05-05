@@ -25,8 +25,28 @@ BRFSS2018_append <- bind_rows(BRFSS18v1, BRFSS18v2)
 BRFSS2018_append  <- bind_rows(BRFSS2018_append, BRFSS2018)
 BRFSS2018_append  <- bind_rows(BRFSS2018_append , BRFSS18v3)
 
+# Set states to keep
 BRFSS2018_append <- BRFSS2018_append[BRFSS2018_append$X_STATE %in% 
                                        c(13, 34, 36, 39, 41),]
+# Keep only females
+BRFSS2018_append <- BRFSS2018_append %>% filter(BRFSS2018_append$SEX1 == 2)
+
+# Keep 21-75 years old
+BRFSS2018_append <- BRFSS2018_append %>% filter(BRFSS2018_append$X_AGE80 >= 21 
+                                                & BRFSS2018_append$X_AGE80 <= 75)
+
+# Set vars to keep
+
+keepVars <- c("X_AGE65YR", "X_STATE", "X_PSU", "MENTHLTH", "HLTHPLN1", "CHECKUP1",
+              "MARITAL", "QSTVER", "CELLFON4", "MEDCOST", "EMPLOY1", "HLTHCVR1", 
+              "X_EDUCAG", "X_LLCPWT", "X_STSTR", "X_INCOMG", "FLUSHOT6", "GENHLTH",
+              "POORHLTH", "PHYSHLTH", "HADPAP2", "LASTPAP2", "HPVTEST", "HADMAM", 
+              "HOWLONG", "CAREGIV1", "CRGVLNG1", "LSTCOVRG", "DRVISITS", "CRGVHRS1",
+              "X_CHLDCNT", "X_AGEG5YR", "X_AGE80", "X_AGE_G", "X_BMI5CAT", "X_RFPAP34",
+              "X_MAM5022", "SEX1")
+
+BRFSS2018_append <- BRFSS2018_append[, keepVars]
+write.csv(BRFSS2018_append, "Desktop/BRFSS2018_appendv2.csv", row.names = FALSE)
 
 
 # Set vars to keep
