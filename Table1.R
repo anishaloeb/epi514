@@ -203,4 +203,8 @@ prop.table(svytable(~X_INCOMG + CareCat, bd, exclude='null',
 
 svyby(~DRVISITS, by = ~CareCat, design = bd, FUN = svymean, na.rm = TRUE)
 
+table(BRFSS2018_append$X_AGEG5YR, BRFSS2018_append$CareCat, useNA = "always") # raw
+prop.table(svytable(~X_AGEG5YR + CareCat, design = bd, exclude = 'null', na.action=na.pass),
+           margin = 2) * 100
+
 
