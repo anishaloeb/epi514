@@ -80,6 +80,7 @@ BRFSS2018_append$GENHLTH[BRFSS2018_append$GENHLTH == 7] <- NA
 BRFSS2018_append$GENHLTH[BRFSS2018_append$GENHLTH == 9] <- NA
 BRFSS2018_append$GENHLTH[BRFSS2018_append$GENHLTH == ""] <- NA
 
+BRFSS2018_append$X_INCOMG[BRFSS2018_append$X_INCOMG==9] <- NA
 # Create CareCat Var
 
 BRFSS2018_append$CareCat <- NA
@@ -131,6 +132,11 @@ summary(BRFSS2018_append$GENHLTH)
 
 table(BRFSS2018_append$GENHLTH, BRFSS2018_append$CareCat, useNA = "always") # raw
 prop.table(svytable(~GENHLTH + CareCat, bd, exclude='null', na.action=na.pass), margin = 2) *100
+
+##Income 
+table(BRFSS2018_append$X_INCOMG, BRFSS2018_append$CareCat, useNA = "always") # raw
+prop.table(svytable(~X_INCOMG + CareCat, design = bd, exclude = 'null', na.action=na.pass),
+           margin = 2) * 100
 
 
 
