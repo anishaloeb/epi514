@@ -138,6 +138,13 @@ table(BRFSS2018_append$X_INCOMG, BRFSS2018_append$CareCat, useNA = "always") # r
 prop.table(svytable(~X_INCOMG + CareCat, design = bd, exclude = 'null', na.action=na.pass),
            margin = 2) * 100
 
+#Insurance HLTHPLN1
+
+table(BRFSS2018_append$HLTHPLN1, BRFSS2018_append$CareCat, useNA = "always") # raw
+prop.table(svytable(~HLTHPLN1 + CareCat, design = bd, exclude = 'null', na.action=na.pass),
+           margin = 2) * 100
+
+
 
 
 
