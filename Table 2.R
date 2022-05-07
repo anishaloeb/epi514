@@ -38,6 +38,8 @@ BRFSS2018_append$ageCat <- factor(BRFSS2018_append$X_AGEG5YR,
                                              "70-74")
 )
 
+# Set dichotomized age cats for Pap
+
 BRFSS2018_append <- BRFSS2018_append %>% mutate(
   age1 = case_when(
     ageCat == "30-34" ~ 1,
@@ -77,6 +79,7 @@ BRFSS2018_append <- BRFSS2018_append %>% mutate(
   age9 = factor(age9, labels = c("70-74", "25-29"))
 )
 
+# Age Strata associations for Pap
 
 (strat1 <- with(BRFSS2018_append, 
                table(X_RFPAP34, CareCatFac, age1)))
@@ -109,4 +112,43 @@ BRFSS2018_append <- BRFSS2018_append %>% mutate(
 (strat8 <- with(BRFSS2018_append, 
                 table(X_RFPAP34, CareCatFac, age8)))
 (epi.2by2(strat8))
+
+# Set dichotomized age vars for Mammogram
+
+BRFSS2018_append <- BRFSS2018_append %>% mutate(
+  age1_m = case_when(
+    ageCat == "55-59" ~ 1,
+    ageCat == "50-54" ~ 2),
+  age1_m = factor(age1_m, labels = c("55-59", "50-54")),
+  age2_m = case_when(
+    ageCat == "60-64" ~ 1,
+    ageCat == "50-54" ~ 2),
+  age2_m = factor(age2_m, labels = c("60-64", "50-54")),
+  age3_m = case_when(
+    ageCat == "65-69" ~ 1,
+    ageCat == "50-54" ~ 2),
+  age3_m = factor(age3_m, labels = c("65-69", "50-54")),
+  age4_m = case_when(
+    ageCat == "70-74" ~ 1,
+    ageCat == "50-54" ~ 2),
+  age4_m = factor(age4_m, labels = c("70-74", "50-54"))
+)
+
+# Age Strata associations for Mammogram
+
+(strat1 <- with(BRFSS2018_append, 
+                table(X_MAM5022, CareCatFac, age1_m)))
+(epi.2by2(strat1))
+
+(strat2 <- with(BRFSS2018_append, 
+                table(X_MAM5022, CareCatFac, age2_m)))
+(epi.2by2(strat2))
+
+(strat3 <- with(BRFSS2018_append, 
+                table(X_MAM5022, CareCatFac, age3_m)))
+(epi.2by2(strat3))
+
+(strat4 <- with(BRFSS2018_append, 
+                table(X_MAM5022, CareCatFac, age4_m)))
+(epi.2by2(strat4))
 
