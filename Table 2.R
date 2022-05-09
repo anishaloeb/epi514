@@ -48,14 +48,41 @@ BRFSS2018_append$ageCat <- factor(BRFSS2018_append$X_AGEG5YR,
                                              "70-74")
 )
 
-# Adjusted Pap 
+# Age Adjusted Pap 
 (strat1 <- with(BRFSS2018_append,
                 table(X_RFPAP34, CareCatFac, ageCat)))
 
 (epi.2by2(strat1[1:2, 1:2, 1:9])) # excluding 70-74
 
-# Adjusted Mammogram
+# Age Adjusted Mammogram
 (strat2 <- with(BRFSS2018_append,
                 table(X_MAM5022, CareCatFac, ageCat)))
 
 (epi.2by2(strat2[1:2, 1:2, 6:10])) # excluding age cats < 50
+
+# Education adjusted Pap
+BRFSS2018_append$eduCat <- factor(BRFSS2018_append$X_EDUCAG,
+                                  labels = c("Did not graduate High School",
+                                             "Graduated High School",
+                                             "Attended College or Technical School",
+                                             "Graduated from College or Technical School"))
+(strat1 <- with(BRFSS2018_append,
+               table(X_RFPAP34, CareCatFac, eduCat)))
+(epi.2by2(strat1))
+
+# Education adjusted Mammogram
+(strat2 <- with(BRFSS2018_append,
+                table(X_MAM5022, CareCatFac, eduCat)))
+(epi.2by2(strat2))
+
+# Education adjusted Flushot
+(strat3 <- with(BRFSS2018_append,
+                table(FLUSHOT6, CareCatFac, eduCat)))
+(epi.2by2(strat3))
+
+# Education adjusted Checkup
+(strat4 <- with(BRFSS2018_append,
+                table(CheckupCat, CareCatFac, eduCat)))
+(epi.2by2(strat4))
+
+
