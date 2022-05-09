@@ -1,4 +1,4 @@
-BRFSS2018_append <- read.csv("Desktop/BRFSS2018_append_CareCat&Missing.csv #missing and CareCat already there
+BRFSS2018_append <- read.csv("Desktop/BRFSS2018_append_CareCat&Missing.csv") #missing and CareCat already there
 
 # set survey weights
 
