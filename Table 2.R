@@ -1,5 +1,15 @@
 BRFSS2018_append <- read.csv("Desktop/BRFSS2018_append_CareCat&Missing.csv") #missing and CareCat already there
 
+BRFSS2018_append$FLUSHOT6[BRFSS2018_append$FLUSHOT6 == 7] <- NA
+BRFSS2018_append$FLUSHOT6[BRFSS2018_append$FLUSHOT6 == 9] <- NA
+
+BRFSS2018_append$CheckupCat[BRFSS2018_append$CHECKUP1 == 1] <- 1
+BRFSS2018_append$CheckupCat[BRFSS2018_append$CHECKUP1 == 2] <- 1
+BRFSS2018_append$CheckupCat[BRFSS2018_append$CHECKUP1 == 3] <- 2
+BRFSS2018_append$CheckupCat[BRFSS2018_append$CHECKUP1 == 4] <- 2
+BRFSS2018_append$CheckupCat[BRFSS2018_append$CHECKUP1 == 8] <- 2
+
+
 # set survey weights
 
 options(survey.lonely.psu = "adjust")
