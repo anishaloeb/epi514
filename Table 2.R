@@ -20,9 +20,13 @@ bd <- svydesign(data = BRFSS2018_append, id = ~X_PSU, strata = ~X_STSTR,
 
 # Prevalence between Caregivers and Non Caregivers
 
-svytable(~X_RFPAP34 + CareCat, bd) %>% prop.table(margin=2)
+prop.table(table(BRFSS2018_append$X_RFPAP34,BRFSS2018_append$CareCatFac, deparse.level = 2), margin = 2)
 
-svytable(~X_MAM5022 + CareCat, bd) %>% prop.table(margin=2)
+prop.table(table(BRFSS2018_append$X_MAM5022,BRFSS2018_append$CareCatFac, deparse.level = 2), margin = 2)
+
+prop.table(table(BRFSS2018_append$FLUSHOT6,BRFSS2018_append$CareCatFac, deparse.level = 2), margin = 2)
+
+prop.table(table(BRFSS2018_append$CheckupCat,BRFSS2018_append$CareCatFac, deparse.level = 2), margin = 2)
 
 # Unadjusted Associations
 
