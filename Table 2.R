@@ -60,6 +60,18 @@ BRFSS2018_append$ageCat <- factor(BRFSS2018_append$X_AGEG5YR,
 
 (epi.2by2(strat2[1:2, 1:2, 6:10])) # excluding age cats < 50
 
+# Age adjusted Flushot
+
+(strat3 <- with(BRFSS2018_append,
+                table(FLUSHOT6, CareCatFac, ageCat)))
+(epi.2by2(strat3))
+
+# Age adjusted Checkup
+
+(strat4 <- with(BRFSS2018_append,
+                table(CheckupCat, CareCatFac, ageCat)))
+(epi.2by2(strat4))
+
 # Education adjusted Pap
 BRFSS2018_append$eduCat <- factor(BRFSS2018_append$X_EDUCAG,
                                   labels = c("Did not graduate High School",
@@ -84,5 +96,285 @@ BRFSS2018_append$eduCat <- factor(BRFSS2018_append$X_EDUCAG,
 (strat4 <- with(BRFSS2018_append,
                 table(CheckupCat, CareCatFac, eduCat)))
 (epi.2by2(strat4))
+
+### Effect modification
+# Insurance
+  # Pap
+(strat1 <- with(subset(BRFSS2018_append, HLTHPLN1 == 1),
+                table(CareCatFac, X_RFPAP34)))
+(epi.2by2(strat1))
+
+(strat2 <- with(subset(BRFSS2018_append, HLTHPLN1 == 2),
+                table(CareCatFac, X_RFPAP34)))
+(epi.2by2(strat2))
+
+  # Mammogram
+(strat1 <- with(subset(BRFSS2018_append, HLTHPLN1 == 1),
+                table(CareCatFac, X_MAM5022)))
+(epi.2by2(strat1))
+
+(strat2 <- with(subset(BRFSS2018_append, HLTHPLN1 == 2),
+                table(CareCatFac, X_MAM5022)))
+(epi.2by2(strat2))
+
+  # Health Checkup
+(strat1 <- with(subset(BRFSS2018_append, HLTHPLN1 == 1),
+                table(CareCatFac, CheckupCat)))
+(epi.2by2(strat1))
+
+(strat2 <- with(subset(BRFSS2018_append, HLTHPLN1 == 2),
+                table(CareCatFac, CheckupCat)))
+(epi.2by2(strat2))
+
+# Flu shot
+(strat1 <- with(subset(BRFSS2018_append, HLTHPLN1 == 1),
+                table(CareCatFac, FLUSHOT6)))
+(epi.2by2(strat1))
+
+(strat2 <- with(subset(BRFSS2018_append, HLTHPLN1 == 2),
+                table(CareCatFac, FLUSHOT6)))
+(epi.2by2(strat2))
+
+# Employment Status
+  # Pap
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 1),
+                table(CareCatFac, X_RFPAP34)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 2),
+                table(CareCatFac, X_RFPAP34)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 3),
+                table(CareCatFac, X_RFPAP34)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 4),
+                table(CareCatFac, X_RFPAP34)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 5),
+                table(CareCatFac, X_RFPAP34)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 6),
+                table(CareCatFac, X_RFPAP34)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 7),
+                table(CareCatFac, X_RFPAP34)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 8),
+                table(CareCatFac, X_RFPAP34)))
+(epi.2by2(strat1))
+
+    # Mamm
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 1),
+                table(CareCatFac, X_MAM5022)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 2),
+                table(CareCatFac, X_MAM5022)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 3),
+                table(CareCatFac, X_MAM5022)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 4),
+                table(CareCatFac, X_MAM5022)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 5),
+                table(CareCatFac, X_MAM5022)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 6),
+                table(CareCatFac, X_MAM5022)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 7),
+                table(CareCatFac, X_MAM5022)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 8),
+                table(CareCatFac, X_MAM5022)))
+(epi.2by2(strat1))
+
+  # Flushot
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 1),
+                table(CareCatFac, CheckupCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 2),
+                table(CareCatFac, CheckupCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 3),
+                table(CareCatFac, CheckupCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 4),
+                table(CareCatFac, CheckupCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 5),
+                table(CareCatFac, CheckupCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 6),
+                table(CareCatFac, CheckupCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 7),
+                table(CareCatFac, CheckupCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 8),
+                table(CareCatFac, CheckupCat)))
+(epi.2by2(strat1))
+
+  # Checkup
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 1),
+                table(CareCatFac, FLUSHOT6)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 2),
+                table(CareCatFac, FLUSHOT6)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 3),
+                table(CareCatFac, FLUSHOT6)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 4),
+                table(CareCatFac, FLUSHOT6)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 5),
+                table(CareCatFac, FLUSHOT6)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 6),
+                table(CareCatFac, FLUSHOT6)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 7),
+                table(CareCatFac, FLUSHOT6)))
+(epi.2by2(strat1))
+
+(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 8),
+                table(CareCatFac, FLUSHOT6)))
+(epi.2by2(strat1))
+
+
+# Dose Response Hours per week
+BRFSS2018_append$CRGVHRS1[BRFSS2018_append$CRGVHRS1 == 7] <- NA
+BRFSS2018_append$CRGVHRS1[BRFSS2018_append$CRGVHRS1 == 9] <- NA
+
+  # make variables with caregivers who work x amount per week versus all non-caregivers
+BRFSS2018_append <- BRFSS2018_append %>% mutate(
+  hour1 = case_when(
+    CRGVHRS1 == "1" ~ 1,
+    CareCatFac == "2" ~ 2),
+  hour1 = factor(hour1, labels = c("HourCat1", "NonCaregiver")),
+  hour2 = case_when(
+    CRGVHRS1 == "2" ~ 1,
+    CareCatFac == "2" ~ 2),
+  hour2 = factor(hour2, labels = c("HourCat2", "NonCaregiver")),
+  hour3 = case_when(
+    CRGVHRS1 == "3" ~ 1,
+    CareCatFac == "2" ~ 2),
+  hour3 = factor(hour3, labels = c("HourCat3", "NonCaregiver")),
+  hour4 = case_when(
+    CRGVHRS1 == "4" ~ 1,
+    CareCatFac == "2" ~ 2),
+  hour4 = factor(hour4, labels = c("HourCat4", "NonCaregiver"))
+  )
+  
+  # less than 8 hours
+    # Pap
+(strat1 <- with(BRFSS2018_append,
+                       table(X_RFPAP34, hour1)))
+(epi.2by2(strat1))
+    
+    # Mamm
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour1)))
+(epi.2by2(strat1))
+
+    # Flushot
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour1)))
+(epi.2by2(strat1))
+
+    # Checkup
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour1)))
+(epi.2by2(strat1))
+
+# 9-19 hours
+  # Pap
+(strat1 <- with(BRFSS2018_append,
+                table(X_RFPAP34, hour2)))
+(epi.2by2(strat1))
+
+  # Mamm
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour2)))
+(epi.2by2(strat1))
+
+  # Flushot
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour1)))
+(epi.2by2(strat1))
+
+  # Checkup
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour1)))
+(epi.2by2(strat1))
+
+# 20-39 hours
+  # Pap
+(strat1 <- with(BRFSS2018_append,
+                table(X_RFPAP34, hour3)))
+(epi.2by2(strat1))
+
+  # Mamm
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour3)))
+(epi.2by2(strat1))
+
+  #Flushot
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour3)))
+(epi.2by2(strat1))
+  
+  # Checkup
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour3)))
+(epi.2by2(strat1))
+
+# over 40
+  # Pap
+(strat1 <- with(BRFSS2018_append,
+                table(X_RFPAP34, hour4)))
+(epi.2by2(strat1))
+
+  # Mamm
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour4)))
+(epi.2by2(strat1))
+
+  # Flushot
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour4)))
+(epi.2by2(strat1))
+
+  # Checkup
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour4)))
+(epi.2by2(strat1))
 
 
