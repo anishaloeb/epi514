@@ -9,14 +9,8 @@ BRFSS2018_append$CheckupCat[BRFSS2018_append$CHECKUP1 == 3] <- 2
 BRFSS2018_append$CheckupCat[BRFSS2018_append$CHECKUP1 == 4] <- 2
 BRFSS2018_append$CheckupCat[BRFSS2018_append$CHECKUP1 == 8] <- 2
 
-
-# set survey weights
-
-options(survey.lonely.psu = "adjust")
-
-bd <- svydesign(data = BRFSS2018_append, id = ~X_PSU, strata = ~X_STSTR,
-                        weight = ~X_LLCPWT, nest = TRUE)
-                        
+BRFSS2018_append$CareCatFac[BRFSS2018_append$CareCat == 0] <- 2
+BRFSS2018_append$CareCatFac[BRFSS2018_append$CareCat == 1] <- 1
 
 # Prevalence between Caregivers and Non Caregivers
 
@@ -29,9 +23,6 @@ prop.table(table(BRFSS2018_append$FLUSHOT6,BRFSS2018_append$CareCatFac, deparse.
 prop.table(table(BRFSS2018_append$CheckupCat,BRFSS2018_append$CareCatFac, deparse.level = 2), margin = 2)
 
 # Unadjusted Associations
-
-BRFSS2018_append$CareCatFac[BRFSS2018_append$CareCat == 0] <- 2
-BRFSS2018_append$CareCatFac[BRFSS2018_append$CareCat == 1] <- 1
 
 (rrTab <- table(BRFSS2018_append$X_RFPAP34, BRFSS2018_append$CareCatFac, deparse.level = 2))
 (rrStrat <- epi.2by2(dat=rrTab))
