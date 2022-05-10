@@ -273,43 +273,42 @@ BRFSS2018_append$eduCat <- factor(BRFSS2018_append$X_EDUCAG,
 BRFSS2018_append$CRGVHRS1[BRFSS2018_append$CRGVHRS1 == 7] <- NA
 BRFSS2018_append$CRGVHRS1[BRFSS2018_append$CRGVHRS1 == 9] <- NA
 
-  # make variables with caregivers who work x amount per week versus all non-caregivers
 BRFSS2018_append <- BRFSS2018_append %>% mutate(
   hour1 = case_when(
-    CRGVHRS1 == "1" ~ 1,
+    CareCatFac == "1" & CRGVHRS1 == "1" ~ 1,
     CareCatFac == "2" ~ 2),
   hour1 = factor(hour1, labels = c("HourCat1", "NonCaregiver")),
   hour2 = case_when(
-    CRGVHRS1 == "2" ~ 1,
+    CareCatFac == "1" & CRGVHRS1 == "2" ~ 1,
     CareCatFac == "2" ~ 2),
   hour2 = factor(hour2, labels = c("HourCat2", "NonCaregiver")),
   hour3 = case_when(
-    CRGVHRS1 == "3" ~ 1,
+    CareCatFac == "1" & CRGVHRS1 == "3" ~ 1,
     CareCatFac == "2" ~ 2),
   hour3 = factor(hour3, labels = c("HourCat3", "NonCaregiver")),
   hour4 = case_when(
-    CRGVHRS1 == "4" ~ 1,
+    CareCatFac == "1" & CRGVHRS1 == "4" ~ 1,
     CareCatFac == "2" ~ 2),
   hour4 = factor(hour4, labels = c("HourCat4", "NonCaregiver"))
   )
   
-  # less than 8 hours
-    # Pap
+# less than 8 hours
+  # Pap
 (strat1 <- with(BRFSS2018_append,
                        table(X_RFPAP34, hour1)))
 (epi.2by2(strat1))
-    
-    # Mamm
+
+  # Mamm
 (strat1 <- with(BRFSS2018_append,
                 table(X_MAM5022, hour1)))
 (epi.2by2(strat1))
 
-    # Flushot
+  # Flu
 (strat1 <- with(BRFSS2018_append,
                 table(FLUSHOT6, hour1)))
 (epi.2by2(strat1))
 
-    # Checkup
+  # Checkup
 (strat1 <- with(BRFSS2018_append,
                 table(CheckupCat, hour1)))
 (epi.2by2(strat1))
@@ -325,14 +324,14 @@ BRFSS2018_append <- BRFSS2018_append %>% mutate(
                 table(X_MAM5022, hour2)))
 (epi.2by2(strat1))
 
-  # Flushot
+  # Flu
 (strat1 <- with(BRFSS2018_append,
-                table(FLUSHOT6, hour1)))
+                table(FLUSHOT6, hour2)))
 (epi.2by2(strat1))
 
   # Checkup
 (strat1 <- with(BRFSS2018_append,
-                table(CheckupCat, hour1)))
+                table(CheckupCat, hour2)))
 (epi.2by2(strat1))
 
 # 20-39 hours
@@ -346,11 +345,11 @@ BRFSS2018_append <- BRFSS2018_append %>% mutate(
                 table(X_MAM5022, hour3)))
 (epi.2by2(strat1))
 
-  #Flushot
+  # Flu
 (strat1 <- with(BRFSS2018_append,
                 table(FLUSHOT6, hour3)))
 (epi.2by2(strat1))
-  
+ 
   # Checkup
 (strat1 <- with(BRFSS2018_append,
                 table(CheckupCat, hour3)))
@@ -367,7 +366,7 @@ BRFSS2018_append <- BRFSS2018_append %>% mutate(
                 table(X_MAM5022, hour4)))
 (epi.2by2(strat1))
 
-  # Flushot
+  # Flu 
 (strat1 <- with(BRFSS2018_append,
                 table(FLUSHOT6, hour4)))
 (epi.2by2(strat1))
