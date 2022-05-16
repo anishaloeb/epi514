@@ -130,137 +130,82 @@ BRFSS2018_append$eduCat <- factor(BRFSS2018_append$X_EDUCAG,
                 table(CareCatFac, FLUSHOT6)))
 (epi.2by2(strat2))
 
-# Employment Status
-  # Pap
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 1),
-                table(CareCatFac, X_RFPAP34)))
+### Employment Status
+BRFSS2018_append$EmployCat[BRFSS2018_append$EMPLOY1 == 1] <- 1
+BRFSS2018_append$EmployCat[BRFSS2018_append$EMPLOY1 == 2] <- 1
+BRFSS2018_append$EmployCat[BRFSS2018_append$EMPLOY1 == 3] <- 2
+BRFSS2018_append$EmployCat[BRFSS2018_append$EMPLOY1 == 4] <- 2
+BRFSS2018_append$EmployCat[BRFSS2018_append$EMPLOY1 == 5] <- 2
+BRFSS2018_append$EmployCat[BRFSS2018_append$EMPLOY1 == 6] <- 2
+BRFSS2018_append$EmployCat[BRFSS2018_append$EMPLOY1 == 7] <- 2
+BRFSS2018_append$EmployCat[BRFSS2018_append$EMPLOY1 == 8] <- 2 
+
+  # Education as confounder
+
+(strat1 <- with(subset(BRFSS2018_append,EmployCat == 1),
+                table(X_RFPAP34, CareCatFac, eduCat)))
 (epi.2by2(strat1))
 
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 2),
-                table(CareCatFac, X_RFPAP34)))
+(strat1 <- with(subset(BRFSS2018_append,EmployCat == 2),
+                table(X_RFPAP34, CareCatFac, eduCat)))
 (epi.2by2(strat1))
 
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 3),
-                table(CareCatFac, X_RFPAP34)))
+(strat1 <- with(subset(BRFSS2018_append,EmployCat == 1),
+                table(X_MAM5022, CareCatFac, eduCat)))
 (epi.2by2(strat1))
 
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 4),
-                table(CareCatFac, X_RFPAP34)))
+(strat1 <- with(subset(BRFSS2018_append,EmployCat == 2),
+                table(X_MAM5022, CareCatFac, eduCat)))
 (epi.2by2(strat1))
 
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 5),
-                table(CareCatFac, X_RFPAP34)))
+(strat1 <- with(subset(BRFSS2018_append,EmployCat == 1),
+                table(FLUSHOT6, CareCatFac, eduCat)))
 (epi.2by2(strat1))
 
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 6),
-                table(CareCatFac, X_RFPAP34)))
+(strat1 <- with(subset(BRFSS2018_append,EmployCat == 2),
+                table(FLUSHOT6, CareCatFac, eduCat)))
 (epi.2by2(strat1))
 
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 7),
-                table(CareCatFac, X_RFPAP34)))
+(strat4 <- with(subset(BRFSS2018_append,EmployCat == 1),
+                table(CheckupCat, CareCatFac, eduCat)))
+(epi.2by2(strat4))
+
+(strat4 <- with(subset(BRFSS2018_append,EmployCat == 2),
+                table(CheckupCat, CareCatFac, eduCat)))
+(epi.2by2(strat4))
+
+  # Income as confounder
+
+(strat1 <- with(subset(BRFSS2018_append,EmployCat == 1),
+                table(X_RFPAP34, CareCatFac, X_INCOMG)))
 (epi.2by2(strat1))
 
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 8),
-                table(CareCatFac, X_RFPAP34)))
+(strat1 <- with(subset(BRFSS2018_append,EmployCat == 2),
+                table(X_RFPAP34, CareCatFac, X_INCOMG)))
 (epi.2by2(strat1))
 
-    # Mamm
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 1),
-                table(CareCatFac, X_MAM5022)))
+(strat1 <- with(subset(BRFSS2018_append,EmployCat == 1),
+                table(X_MAM5022, CareCatFac, X_INCOMG)))
 (epi.2by2(strat1))
 
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 2),
-                table(CareCatFac, X_MAM5022)))
+(strat1 <- with(subset(BRFSS2018_append,EmployCat == 2),
+                table(X_MAM5022, CareCatFac, X_INCOMG)))
 (epi.2by2(strat1))
 
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 3),
-                table(CareCatFac, X_MAM5022)))
+(strat1 <- with(subset(BRFSS2018_append,EmployCat == 1),
+                table(FLUSHOT6, CareCatFac, X_INCOMG)))
 (epi.2by2(strat1))
 
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 4),
-                table(CareCatFac, X_MAM5022)))
+(strat1 <- with(subset(BRFSS2018_append,EmployCat == 2),
+                table(FLUSHOT6, CareCatFac, X_INCOMG)))
 (epi.2by2(strat1))
 
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 5),
-                table(CareCatFac, X_MAM5022)))
+(strat1 <- with(subset(BRFSS2018_append,EmployCat == 1),
+                table(CheckupCat, CareCatFac, X_INCOMG)))
 (epi.2by2(strat1))
 
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 6),
-                table(CareCatFac, X_MAM5022)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 7),
-                table(CareCatFac, X_MAM5022)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 8),
-                table(CareCatFac, X_MAM5022)))
-(epi.2by2(strat1))
-
-  # Flushot
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 1),
-                table(CareCatFac, CheckupCat)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 2),
-                table(CareCatFac, CheckupCat)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 3),
-                table(CareCatFac, CheckupCat)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 4),
-                table(CareCatFac, CheckupCat)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 5),
-                table(CareCatFac, CheckupCat)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 6),
-                table(CareCatFac, CheckupCat)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 7),
-                table(CareCatFac, CheckupCat)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 8),
-                table(CareCatFac, CheckupCat)))
-(epi.2by2(strat1))
-
-  # Checkup
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 1),
-                table(CareCatFac, FLUSHOT6)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 2),
-                table(CareCatFac, FLUSHOT6)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 3),
-                table(CareCatFac, FLUSHOT6)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 4),
-                table(CareCatFac, FLUSHOT6)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 5),
-                table(CareCatFac, FLUSHOT6)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 6),
-                table(CareCatFac, FLUSHOT6)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 7),
-                table(CareCatFac, FLUSHOT6)))
-(epi.2by2(strat1))
-
-(strat1 <- with(subset(BRFSS2018_append, EMPLOY1 == 8),
-                table(CareCatFac, FLUSHOT6)))
+(strat1 <- with(subset(BRFSS2018_append,EmployCat == 2),
+                table(CheckupCat, CareCatFac, X_INCOMG)))
 (epi.2by2(strat1))
 
 
@@ -370,5 +315,9 @@ BRFSS2018_append <- BRFSS2018_append %>% mutate(
 (strat1 <- with(BRFSS2018_append,
                 table(CheckupCat, hour4)))
 (epi.2by2(strat1))
+
+#### Confounders on strata-specific estimates
+
+
 
 
