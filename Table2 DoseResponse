@@ -39,7 +39,6 @@ BRFSS2018_append <- BRFSS2018_append %>% mutate(
                 table(X_MAM5022, hour1)))
 (epi.2by2(strat1))
 
-
 (strat1 <- with(BRFSS2018_append,
                 table(FLUSHOT6, hour1)))
 (epi.2by2(strat1))
@@ -104,3 +103,243 @@ BRFSS2018_append <- BRFSS2018_append %>% mutate(
 
 
 ## testing for confounding
+BRFSS2018_append$eduCat <- factor(BRFSS2018_append$X_EDUCAG,
+                                  labels = c("Did not graduate High School",
+                                             "Graduated High School",
+                                             "Attended College or Technical School",
+                                             "Graduated from College or Technical School"))
+
+BRFSS2018_append$IncomeCat <- factor(BRFSS2018_append$X_INCOMG,
+                                     levels = 1:5,
+                                     labels = c("less15",
+                                                "15toless24",
+                                                "24toless35",
+                                                "35toless50",
+                                                "50+"))
+                                                
+BRFSS2018_append$ageCatNEW <- factor(BRFSS2018_append$ageCatNEW,
+                                     levels = 1:5,
+                                     labels = c("25-34",
+                                                "35-44",
+                                                "45-54",
+                                                "55-64",
+                                                "65-74"))
+                                                
+ 
+  ## less than 8 hours - Education
+ 
+(strat1 <- with(BRFSS2018_append,
+                       table(X_RFPAP34, hour1, eduCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour1, eduCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour1, eduCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour1, eduCat)))
+(epi.2by2(strat1))
+
+  ## 9-19 education
+
+(strat1 <- with(BRFSS2018_append,
+                       table(X_RFPAP34, hour2, eduCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour2, eduCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour2, eduCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour2, eduCat)))
+(epi.2by2(strat1))
+
+    ## 20-39 education
+    
+ (strat1 <- with(BRFSS2018_append,
+                       table(X_RFPAP34, hour3, eduCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour3, eduCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour3, eduCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour3, eduCat)))
+(epi.2by2(strat1))
+
+    ## 40+ education
+(strat1 <- with(BRFSS2018_append,
+                       table(X_RFPAP34, hour4, eduCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour4, eduCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour4, eduCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour4, eduCat)))
+(epi.2by2(strat1))
+
+
+ ### Income
+ ## less than 8 hours - Income
+ 
+(strat1 <- with(BRFSS2018_append,
+                       table(X_RFPAP34, hour1, IncomeCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour1, IncomeCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour1, IncomeCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour1, IncomeCat)))
+(epi.2by2(strat1))
+
+  ## 9-19 Income
+
+(strat1 <- with(BRFSS2018_append,
+                       table(X_RFPAP34, hour2, IncomeCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour2, IncomeCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour2, IncomeCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour2, IncomeCat)))
+(epi.2by2(strat1))
+
+    ## 20-39 Income
+    
+ (strat1 <- with(BRFSS2018_append,
+                       table(X_RFPAP34, hour3, IncomeCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour3, IncomeCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour3, IncomeCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour3, IncomeCat)))
+(epi.2by2(strat1))
+
+    ## 40+ Income
+(strat1 <- with(BRFSS2018_append,
+                       table(X_RFPAP34, hour4, IncomeCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour4, IncomeCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour4, IncomeCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour4, IncomeCat)))
+(epi.2by2(strat1))
+
+
+### Age (10 year)
+ ## less than 8 hours - Age
+ 
+(strat1 <- with(BRFSS2018_append,
+                       table(X_RFPAP34, hour1, ageCatNEW)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour1, ageCatNEW)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour1, ageCatNEW)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour1, ageCatNEW)))
+(epi.2by2(strat1))
+
+  ## 9-19 Age
+
+(strat1 <- with(BRFSS2018_append,
+                       table(X_RFPAP34, hour2, ageCatNEW)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour2, ageCatNEW)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour2, IncomeCat)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour2, ageCatNEW)))
+(epi.2by2(strat1))
+
+    ## 20-39 Age
+    
+ (strat1 <- with(BRFSS2018_append,
+                       table(X_RFPAP34, hour3, ageCatNEW)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour3, ageCatNEW)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour3, ageCatNEW)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour3, ageCatNEW)))
+(epi.2by2(strat1))
+
+    ## 40+ Age
+(strat1 <- with(BRFSS2018_append,
+                       table(X_RFPAP34, hour4, ageCatNEW)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(X_MAM5022, hour4, ageCatNEW)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(FLUSHOT6, hour4, ageCatNEW)))
+(epi.2by2(strat1))
+
+(strat1 <- with(BRFSS2018_append,
+                table(CheckupCat, hour4, ageCatNEW)))
+(epi.2by2(strat1))
+
